@@ -129,3 +129,7 @@ static const uint8_t column_pin_array[MATRIX_COLS] = {11, 12, 13, 14, 10};
 #define SWD_DAT_IO T2
 #define SWD_DAT_MASK bT2
 #define SWD_DAT_PORT P1
+#define LED_STATUS_BLE 22 // 蓝牙连接指示灯
+#define LED_STATUS_CHARGING 23 // 充电指示灯
+#define LED_STATUS_USB 24 // USB连接状态指示灯
+
