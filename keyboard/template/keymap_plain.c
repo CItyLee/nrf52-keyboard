@@ -18,26 +18,39 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include "keymap_common.h"
 #include "keyboard_fn.h"
 
-const uint8_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* 0: qwerty */
-    KEYMAP_ANSI(
-        GRV, 1,   2,   3,   4,   5,   6,   7,   8,   9,   0,   MINS,EQL, BSPC, \
-        TAB, Q,   W,   E,   R,   T,   Y,   U,   I,   O,   P,   LBRC,RBRC,BSLS, \
-        CAPS,A,   S,   D,   F,   G,   H,   J,   K,   L,   SCLN,QUOT,     ENT,  \
-        LSFT,Z,   X,   C,   V,   B,   N,   M,   COMM,DOT, SLSH,          RSFT, \
-        LCTL,LGUI,LALT,          SPC,                     FN0, RGUI,APP, RCTL),
-    /* 1: Poker Fn */
-    KEYMAP_ANSI(
-        ESC, F1,  F2,  F3,  F4,  F5,  F6,  F7,  F8,  F9,  F10, F11, F12, DEL, \
-        FN2,TRNS, UP, TRNS,TRNS,TRNS,TRNS,TRNS,TRNS,CALC,TRNS,HOME,INS, TRNS,  \
-        FN1,LEFT,DOWN,RGHT,TRNS,TRNS,PSCR,SLCK,PAUS,TRNS,TRNS,END,      TRNS, \
-        TRNS,DEL, TRNS,WHOM,MUTE,VOLU,VOLD,TRNS,PGUP,PGDN,DEL,           TRNS, \
-        TRNS,TRNS,TRNS,          TRNS,                     TRNS,TRNS,TRNS,TRNS),
-};
-const action_t fn_actions[] = {
-    /* Poker Layout */
-    ACTION_LAYER_MOMENTARY(1),  // to Fn overlay
-    ACTION_FUNCTION(KEYBOARD_CONTROL), // sleep
-    ACTION_FUNCTION(SWITCH_DEVICE) // switch between usb and ble
+const action_t actionmaps[][MATRIX_ROWS][MATRIX_COLS] = { 
+	[0] = ACTIONMAP_ENC(
+		FN0,  PSLS,  PAST, PMNS,\
+		P7,   P8,    P9,   PPLS, \
+		P4,   P5,    P6,  \
+		P3,   P2,    P1,   PENT, \
+		P0,   FN11, \
+		VOLU, VOLD,  FN0 ),
+
+
+
 };
 
+led_config_t g_led_config = {
+    {
+        // Key Matrix to LED Index
+        { 0   ,  1    ,  2     ,  3,       NO_LED },
+        { 6   ,  5    ,  4     ,  10,      NO_LED},
+        { 7   ,  8    ,  9     ,  NO_LED,  NO_LED },
+        { 13  ,  12   ,  11    ,  16    ,  NO_LED },
+        { 14  ,NO_LED ,  15    ,  NO_LED,  NO_LED },
+    },
+    { // LED Index to Physical Position
+        { 32, 25 }, { 96, 25 }, { 160, 25 }, { 224, 25 }, 
+		{ 160, 75 }, { 96, 75 }, { 32, 75 }, 
+		{ 32, 125 }, { 96, 125 }, { 160, 125 },   { 204, 105 },
+		{ 160, 175 }, { 96, 175 }, { 32, 175 },  
+		{ 64, 225 }, { 160, 225 },{ 204, 205 },
+	 },
+    { // LED Index to Flag
+        255, 4, 4, 4,
+		4, 4, 4,
+		4, 4, 4, 4,
+		4, 4, 4,
+        4, 4, 4, }
+};
